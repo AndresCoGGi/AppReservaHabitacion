@@ -11,6 +11,7 @@ import co.com.poli.apphabitacionreserva.model.Habitacion;
 import co.com.poli.apphabitacionreserva.model.Reserva;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,18 +43,29 @@ public class GuardarServlet extends HttpServlet {
         String accion = request.getParameter("accion");
         switch (accion) {
             case "crearReserva":
-//                Boolean swHabitacion = true;
-//                Boolean swCamas = true;
-//                String idReservaRe = request.getParameter("txtidreserva");
-//                String idHabitacionRe = request.getParameter("txthabitacion");
-//                Integer numCamasRe = Integer.valueOf(request.getParameter("txtcamas"));
-//                swHabitacion = hBusinessImpl.validarExistencia(idHabitacionRe);
-//                swCamas = hBusinessImpl.validarCamas(idHabitacionRe, numCamasRe);
-//                if(swHabitacion == true && swCamas == true){
-//                    
-//                    Reserva reserva = new Reserva(idReservaRe, habitacion, numCamasRe);
-//                }
-//                
+                Habitacion habitacionRe = null;
+                Boolean swCamas = true;
+                String idReservaRe = request.getParameter("txtidreserva");
+                String idHabitacionRe = request.getParameter("txthabitacion");
+                Integer numCamasRe = Integer.valueOf(request.getParameter("txtcamas"));
+                habitacionRe = hBusinessImpl.obtenerHabitacion(idHabitacionRe);
+                swCamas = hBusinessImpl.validarCamas(idHabitacionRe, numCamasRe);
+                if (habitacionRe != null && swCamas == true) {
+                    Reserva reserva = new Reserva(idReservaRe, habitacionRe, numCamasRe);
+                    String mensajeReserva = rBusinessImpl.guardarReserva(reserva);
+                    session.setAttribute("MENSAJE", mensajeReserva);
+                    rd = request.getRequestDispatcher("/mensaje.jsp");
+                } else {
+                    String msj = "";
+                    if (habitacionRe == null) {
+                        msj = "ID de habitacion invalido";
+                    } else if (swCamas == false) {
+                        msj = "Numero de camas erroneo o no disponibilidad";
+                    }
+                    session.setAttribute("MENSAJE", msj);
+                    rd = request.getRequestDispatcher("/mensaje.jsp");
+                }
+
                 break;
             case "crearHabitacion":
                 Double precio = 0D;
@@ -63,12 +75,42 @@ public class GuardarServlet extends HttpServlet {
                 String banoPrivada = request.getParameter("txtbanoprivado");
                 if (tipoHabitacion.equals("compartida")) {
                     precio = 30000D;
+                    if (numCamas < 4 || numCamas > 8) {
+                        String mns = "Numero de camas erroneo debe ser maximo 8 y minimo 4";
+                        session.setAttribute("MENSAJE", mns);
+                        rd = request.getRequestDispatcher("/mensaje.jsp");
+                    } else {
+                        Habitacion habitacion = new Habitacion(idHabitacion, tipoHabitacion, numCamas, banoPrivada, precio);
+                        String mensaje = hBusinessImpl.guardarHabitacion(habitacion);
+                        session.setAttribute("MENSAJE", mensaje);
+                        rd = request.getRequestDispatcher("/mensaje.jsp");
+                    }
                 } else {
                     precio = 50000D;
+                    if (numCamas != 4) {
+                        String msj = "Numero de camas erroneo debe ser 4 camas";
+                        session.setAttribute("MENSAJE", msj);
+                        rd = request.getRequestDispatcher("/mensaje.jsp");
+                    } else {
+                        Habitacion habitacion = new Habitacion(idHabitacion, tipoHabitacion, numCamas, banoPrivada, precio);
+                        String mensaje = hBusinessImpl.guardarHabitacion(habitacion);
+                        session.setAttribute("MENSAJE", mensaje);
+                        rd = request.getRequestDispatcher("/mensaje.jsp");
+                    }
                 }
-                Habitacion habitacion = new Habitacion(idHabitacion, tipoHabitacion, numCamas, banoPrivada, precio);
-                String mensaje = hBusinessImpl.guardarHabitacion(habitacion);
-                session.setAttribute("MENSAJE", mensaje);
+
+                break;
+            case "listarHabitacion":
+                List<Habitacion> listahabita = hBusinessImpl.listarHabitaciones();
+                session.setAttribute("LISTADOH", listahabita);
+                rd = request.getRequestDispatcher("/view/listarHabitacion.jsp");
+                break;
+            case "":
+                break;
+            case "habreser":
+                Integer cantidadi = hBusinessImpl.habitacionesCamaReservada();
+                String cantidad = String.valueOf(cantidadi);
+                session.setAttribute("MENSAJE", cantidad);
                 rd = request.getRequestDispatcher("/mensaje.jsp");
                 break;
             default:

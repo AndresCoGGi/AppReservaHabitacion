@@ -15,5 +15,5 @@ import java.util.List;
 public interface IReservaDao {
     
     String guardarReserva(Reserva reserva);
-    //List<Reserva> listarReserva();
+    List<Reserva> listarReservas();
 }

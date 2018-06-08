@@ -29,14 +29,22 @@
 
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.servletContext.contextPath}/GuardarServlet?accion=listarHabitacion">Listar Habitaciones<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.servletContext.contextPath}/GuardarServlet?accion=valorhabitdisp">Valor Habitaciones disponibles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.servletContext.contextPath}/GuardarServlet?accion=habreser">Habitaciones con al menos una cama reservada</a>
+                    </li>
                 </ul>
             </div>
         </nav><br>
         <form class="form-signin"
               action="${pageContext.servletContext.contextPath}/GuardarServlet"
               method="post">
-            
+
             <h1 class="h3 mb-3 font-weight-normal">Habitacion</h1>
 
             <label for="inputidhabitacion" class="sr-only">ID Habitacion</label>
@@ -60,7 +68,7 @@
                 Registrar</button>
             <p class="mt-5 mb-3 text-muted">&copy;2018</p>
         </form><br>   
-         <form class="form-signin"
+        <form class="form-signin"
               action="${pageContext.servletContext.contextPath}/GuardarServlet"
               method="post">
             <h1 class="h3 mb-3 font-weight-normal">Reserva</h1>
@@ -71,7 +79,7 @@
             <input type="text" id="inputDocumento" name="txthabitacion" class="form-control" placeholder="ID Habitacion" required>
             <label for="inputcamas" class="sr-only">Numero camas</label>
             <input type="text" id="inputDocumento" name="txtcamas" class="form-control" placeholder="Numero camas" required>
-            
+
             <br>
             <button name="accion" value="crearReserva" 
                     type="submit" class="btn btn-primary">

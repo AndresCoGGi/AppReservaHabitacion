@@ -6,6 +6,7 @@
 package co.com.poli.apphabitacionreserva.business;
 
 import co.com.poli.apphabitacionreserva.model.Habitacion;
+import java.util.List;
 
 /**
  *
@@ -13,7 +14,9 @@ import co.com.poli.apphabitacionreserva.model.Habitacion;
  */
 public interface IHabitacionBusiness {
     String guardarHabitacion(Habitacion habitacion);
-    Boolean validarExistencia(String idHabitacion);
+    Habitacion obtenerHabitacion(String idHabitacion);
     Boolean validarCamas(String idHabitacion, Integer numCamas);
-    Habitacion retornarHabitacion(String idHabitacion);
+    List<Habitacion> listarHabitaciones();
+    //String valorHabitacionDisponible();
+    Integer habitacionesCamaReservada();
 }

@@ -8,6 +8,7 @@ package co.com.poli.apphabitacionreserva.dao.implementation;
 import co.com.poli.apphabitacionreserva.dao.IReservaDao;
 import co.com.poli.apphabitacionreserva.data.ReservaData;
 import co.com.poli.apphabitacionreserva.model.Reserva;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +23,11 @@ public class ReservaDaoImpl implements IReservaDao {
         listaReserva.add(reserva);
         ReservaData.setListaReservas(listaReserva);
         return "Reserva creada";
+    }
+
+    @Override
+    public List<Reserva> listarReservas() {
+        return ReservaData.getListaReservas();
     }
 
 }

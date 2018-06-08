@@ -11,13 +11,14 @@ import co.com.poli.apphabitacionreserva.dao.implementation.HabitacionDaoImpl;
 import co.com.poli.apphabitacionreserva.data.habitacionData;
 import co.com.poli.apphabitacionreserva.model.Habitacion;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author ANDRESCOGI
  */
-public class HabitacionBusinessImpl implements IHabitacionBusiness{
-    
+public class HabitacionBusinessImpl implements IHabitacionBusiness {
+
     private HabitacionDaoImpl habitacionDaoImpl = new HabitacionDaoImpl();
 
     @Override
@@ -40,18 +41,66 @@ public class HabitacionBusinessImpl implements IHabitacionBusiness{
     }
 
     @Override
-    public Boolean validarExistencia(String idHabitacion) {
-        return true;
-    }
-
-    @Override
     public Boolean validarCamas(String idHabitacion, Integer numCamas) {
-        return true;
+        Boolean swCamas = true;
+        List<Habitacion> listaHabitacion = habitacionDaoImpl.listarHabitaciones();
+        for (Habitacion habitacion : listaHabitacion) {
+            if (habitacion.getIdHabitacion().equals(idHabitacion)) {
+                if (habitacion.getTipoHabitacion().equals("privada")) {
+                    if (!Objects.equals(numCamas, habitacion.getNumeroCamas())) {
+                        swCamas = false;
+                    } else {
+                        Integer numeroCamas = 0;
+                        numeroCamas = habitacion.getNumeroCamasDisponibles();
+                        numeroCamas = numeroCamas - numCamas;
+                        habitacion.setNumeroCamasDisponibles(numeroCamas);
+                        habitacion.setEstado(true);
+                    }
+                } else {
+                    if (numCamas > habitacion.getNumeroCamas()) {
+                        swCamas = false;
+                    } else {
+                        Integer numeroCamas = 0;
+                        numeroCamas = habitacion.getNumeroCamasDisponibles();
+                        numeroCamas = numeroCamas - numCamas;
+                        habitacion.setNumeroCamasDisponibles(numeroCamas);
+                        habitacion.setEstado(true);
+                    }
+                }
+            }
+        }
+        return swCamas;
     }
 
     @Override
-    public Habitacion retornarHabitacion(String idHabitacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Habitacion obtenerHabitacion(String idHabitacion) {
+        return habitacionDaoImpl.obtenerHabitacion(idHabitacion);
     }
-    
+
+    @Override
+    public List<Habitacion> listarHabitaciones() {
+        return habitacionDaoImpl.listarHabitaciones();
+    }
+
+//    @Override
+//    public String valorHabitacionDisponible() {
+//        List<Habitacion> listaHabitacion = habitacionDaoImpl.listarHabitaciones();
+//        for (Habitacion habitacion : listaHabitacion) {
+//            if(habitacion.){
+//                
+//            }
+//        }
+//    }
+    @Override
+    public Integer habitacionesCamaReservada() {
+        Integer contHabiRe = 0;
+        List<Habitacion> listaHabitacion = habitacionDaoImpl.listarHabitaciones();
+        for (Habitacion habitacion : listaHabitacion) {
+            if (habitacion.getEstado() == true) {
+                contHabiRe++;
+            }
+        }
+        return contHabiRe;
+    }
+
 }

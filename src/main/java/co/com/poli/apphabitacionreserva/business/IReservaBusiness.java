@@ -6,6 +6,7 @@
 package co.com.poli.apphabitacionreserva.business;
 
 import co.com.poli.apphabitacionreserva.model.Reserva;
+import java.util.List;
 
 /**
  *
@@ -14,6 +15,6 @@ import co.com.poli.apphabitacionreserva.model.Reserva;
 public interface IReservaBusiness {
 
     String guardarReserva(Reserva reserva);
-    
-    
+    List<Reserva> listarReservas();
+
 }

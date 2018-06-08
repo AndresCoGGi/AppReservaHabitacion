@@ -15,6 +15,7 @@ import java.util.List;
 public interface IHabitacionDao {
     
     String guardarHabitacion(Habitacion habitacion);
-    //List<Habitacion> listarHabitacion();
+    Habitacion obtenerHabitacion(String idHabitacion);
+    List<Habitacion> listarHabitaciones();
     
 }

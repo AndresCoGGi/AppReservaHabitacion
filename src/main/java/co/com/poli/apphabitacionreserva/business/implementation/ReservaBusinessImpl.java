@@ -39,7 +39,9 @@ public class ReservaBusinessImpl implements IReservaBusiness {
 
     }
 
- 
+    @Override
+    public List<Reserva> listarReservas() {
+        return reservaDaoImpl.listarReservas();
+    }
 
- 
 }

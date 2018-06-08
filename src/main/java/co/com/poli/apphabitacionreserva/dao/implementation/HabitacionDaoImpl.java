@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author ANDRESCOGI
  */
-public class HabitacionDaoImpl implements IHabitacionDao{
+public class HabitacionDaoImpl implements IHabitacionDao {
 
     @Override
     public String guardarHabitacion(Habitacion habitacion) {
@@ -24,5 +24,21 @@ public class HabitacionDaoImpl implements IHabitacionDao{
         return "Habitacion creada";
     }
 
-   
+    @Override
+    public Habitacion obtenerHabitacion(String idHabitacion) {
+        Habitacion habitacion = null;
+        List<Habitacion> listaHabitaciones = habitacionData.getListaHabitaciones();
+        for (Habitacion listaHabitacione : listaHabitaciones) {
+            if (listaHabitacione.getIdHabitacion().equals(idHabitacion)) {
+                habitacion = listaHabitacione;
+            }
+        }
+        return habitacion;
+    }
+
+    @Override
+    public List<Habitacion> listarHabitaciones() {
+        return habitacionData.getListaHabitaciones();
+    }
+
 }

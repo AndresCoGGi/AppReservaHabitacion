@@ -14,8 +14,10 @@ public class Habitacion {
     private String idHabitacion;
     private String tipoHabitacion;
     private Integer numeroCamas;
+    private Integer numeroCamasDisponibles;
     private String bañoPrivado;
     private Double precio;
+    private Boolean estado = false;
 
     public Habitacion(String idHabitacion, String tipoHabitacion, Integer numeroCamas, String bañoPrivado, Double precio) {
         this.idHabitacion = idHabitacion;
@@ -23,6 +25,8 @@ public class Habitacion {
         this.numeroCamas = numeroCamas;
         this.bañoPrivado = bañoPrivado;
         this.precio = precio;
+        numeroCamasDisponibles = numeroCamas;
+        
     }
 
     public String getIdHabitacion() {
@@ -63,6 +67,22 @@ public class Habitacion {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public Integer getNumeroCamasDisponibles() {
+        return numeroCamasDisponibles;
+    }
+
+    public void setNumeroCamasDisponibles(Integer numeroCamasDisponibles) {
+        this.numeroCamasDisponibles = numeroCamasDisponibles;
     }
     
     

@@ -21,8 +21,8 @@ public class ReservaData {
     static{
         listaReservas = new ArrayList<Reserva>(){
             {
-                add(new Reserva("909", new Habitacion("001", "compartida", 10, "no", 30000D), 2));
-                add(new Reserva("809", new Habitacion("004", "privada", 12, "si", 50000D), 4));
+//                add(new Reserva("909", new Habitacion("001", "compartida", 10, "no", 30000D), 2));
+//                add(new Reserva("809", new Habitacion("004", "privada", 12, "si", 50000D), 4));
                 
             }  
         };
