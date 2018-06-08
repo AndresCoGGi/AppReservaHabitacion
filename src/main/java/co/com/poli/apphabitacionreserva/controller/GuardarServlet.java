@@ -105,7 +105,16 @@ public class GuardarServlet extends HttpServlet {
                 session.setAttribute("LISTADOH", listahabita);
                 rd = request.getRequestDispatcher("/view/listarHabitacion.jsp");
                 break;
-            case "":
+            case "listarReserva":
+                List<Reserva> listareser = rBusinessImpl.listarReservas();
+                session.setAttribute("LISTADOR", listareser);
+                rd = request.getRequestDispatcher("/view/listarReserva.jsp");
+                break;
+            case "valorhabitdisp":
+                Double valorAcumulado = hBusinessImpl.valorHabitacionDisponible();
+                String valor = String.valueOf(valorAcumulado);
+                session.setAttribute("MENSAJE", valor);
+                rd = request.getRequestDispatcher("/mensaje.jsp");
                 break;
             case "habreser":
                 Integer cantidadi = hBusinessImpl.habitacionesCamaReservada();

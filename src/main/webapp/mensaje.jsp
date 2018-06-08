@@ -15,10 +15,10 @@
         <meta name="author" content="">
         <link rel="icon" href="../../../../favicon.ico">
 
-        <title>App Creditos</title>
+        <title>Mensaje</title>
 
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="${pageContext.servletContext.contextPath}/css/signin.css" rel="stylesheet">
+        <link href="${pageContext.servletContext.contextPath}/css/jumbotron.css" rel="stylesheet">
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -31,6 +31,9 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.servletContext.contextPath}/GuardarServlet?accion=listarHabitacion">Listar Habitaciones<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.servletContext.contextPath}/GuardarServlet?accion=listarReserva">Listar Reservas</a>
                     </li>
                 </ul>
             </div>

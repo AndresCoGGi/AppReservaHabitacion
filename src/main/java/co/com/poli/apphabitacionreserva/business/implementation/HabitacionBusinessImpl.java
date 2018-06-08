@@ -82,15 +82,18 @@ public class HabitacionBusinessImpl implements IHabitacionBusiness {
         return habitacionDaoImpl.listarHabitaciones();
     }
 
-//    @Override
-//    public String valorHabitacionDisponible() {
-//        List<Habitacion> listaHabitacion = habitacionDaoImpl.listarHabitaciones();
-//        for (Habitacion habitacion : listaHabitacion) {
-//            if(habitacion.){
-//                
-//            }
-//        }
-//    }
+    @Override
+    public Double valorHabitacionDisponible() {
+        Double valorAcumulado = 0.0;
+        Double valorHabitacion = 0.0;
+        List<Habitacion> listaHabitacion = habitacionDaoImpl.listarHabitaciones();
+        for (Habitacion habitacion : listaHabitacion) {
+            valorHabitacion = (habitacion.getPrecio())*(habitacion.getNumeroCamasDisponibles());
+            valorAcumulado = valorAcumulado + valorHabitacion;
+        }
+        return valorAcumulado;
+    }
+
     @Override
     public Integer habitacionesCamaReservada() {
         Integer contHabiRe = 0;

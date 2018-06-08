@@ -17,6 +17,6 @@ public interface IHabitacionBusiness {
     Habitacion obtenerHabitacion(String idHabitacion);
     Boolean validarCamas(String idHabitacion, Integer numCamas);
     List<Habitacion> listarHabitaciones();
-    //String valorHabitacionDisponible();
+    Double valorHabitacionDisponible();
     Integer habitacionesCamaReservada();
 }

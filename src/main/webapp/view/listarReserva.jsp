@@ -1,6 +1,6 @@
 <%-- 
-    Document   : listarHabitacion
-    Created on : 07-jun-2018, 23:19:04
+    Document   : listarReserva
+    Created on : 07-jun-2018, 23:19:24
     Author     : ANDRESCOGI
 --%>
 
@@ -16,7 +16,7 @@
         <meta name="author" content="">
         <link rel="icon" href="../../../../favicon.ico">
 
-        <title>Lista</title>
+        <title>Menu</title>
 
         <!-- Bootstrap core CSS -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
     <body>
 
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">Habitaciones</a>
+            <a class="navbar-brand" href="#">Reservas</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,27 +42,20 @@
                 <div class="container">
 
                     <table class="table">
-                        <caption>Lista de Habitaciones</caption>
+                        <caption>Lista de Creditos</caption>
                         <thead>
                             <tr>
-                                <th scope="col">ID Habitacion</th>
-                                <th scope="col">Tipo Habitacion</th>
+                                <th scope="col">ID Reserva</th>
+                                <th scope="col">Habitacion</th>
                                 <th scope="col">Numero Camas</th>
-                                <th scope="col">Numero Camas Disponibles</th>
-                                <th scope="col">Baño privado</th>
-                                <th scope="col">Precios</th>
-
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="habitacion" items="${sessionScope.LISTADOH}">
+                            <c:forEach var="reserva" items="${sessionScope.LISTADOR}">
                                 <tr>
-                                    <td><c:out value="${habitacion.getIdHabitacion()}"/></td>
-                                    <td><c:out value="${habitacion.getTipoHabitacion()}"/></td>
-                                    <td><c:out value="${habitacion.getNumeroCamas()}"/></td>
-                                    <td><c:out value="${habitacion.getNumeroCamasDisponibles()}"/></td>
-                                    <td><c:out value="${habitacion.getBañoPrivado()}"/></td>
-                                    <td><c:out value="${habitacion.getPrecio()}"/></td>
+                                    <td><c:out value="${reserva.getIdReserva()}"/></td>
+                                    <td><c:out value="${reserva.getHabitacion().getIdHabitacion()}"/></td>
+                                    <td><c:out value="${reserva.getNumCamas()}"/></td>
                                     <td></td>
 
                                 </tr>
